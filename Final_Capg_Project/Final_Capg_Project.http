@@ -1,0 +1,6 @@
+@Final_Capg_Project_HostAddress = http://localhost:5133
+
+GET {{Final_Capg_Project_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
