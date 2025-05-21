@@ -53,7 +53,7 @@ namespace Final_Capg_Project.Data
                 entity.ToTable("Assessment");
 
                 entity.Property(e => e.AssessmentId).ValueGeneratedNever();
-                entity.Property(e => e.Questions).HasMaxLength(50);
+                entity.Property(e => e.Questions).HasColumnType("nvarchar(max)");
                 entity.Property(e => e.Title).HasMaxLength(50).IsUnicode(false);
 
                 entity.HasOne(d => d.Course)
