@@ -11,6 +11,7 @@ import Courses from './pages/Courses';
 import CourseDetails from './pages/CourseDetails'
 import MyCourse from './pages/MyCourse';
 import AddAssessment from './pages/AddAssessment';
+import TakeAssessment from './pages/TakeAssessment';
 
 
 
@@ -29,6 +30,7 @@ function App() {
                     <Route path="/courses/:courseId" element={<CourseDetails />} />
                     <Route path="/upload-course" element={<UploadCourse />} />
                     <Route path="/my-course/:courseId" element={<MyCourse />} />
+                    <Route path="/my-course/:courseId/take-assessment/:assessmentId" element={<TakeAssessment />} />
                     <Route path="/courses/:courseId/add-assessment" element={<AddAssessment />} />
                 </Routes>
             </div>
