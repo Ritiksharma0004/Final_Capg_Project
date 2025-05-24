@@ -1,6 +1,7 @@
 ﻿import React, { useEffect, useState } from 'react';
 import api from '../services/api';
 import { useNavigate } from 'react-router-dom';
+import '../../src/App.css'
 
 const Dashboard = () => {
     const [userRole, setUserRole] = useState('');
@@ -198,6 +199,15 @@ const Dashboard = () => {
                             </div>
                         </div>
 
+                        <div className="instructor-actions">
+                            <button
+                                className="action-btn upload-btn"
+                                onClick={() => navigate('/upload-course')}
+                            >
+                                Upload Course
+                            </button>
+                        </div>
+
                         <section className="instructor-courses-section">
                             <h3>Your Courses</h3>
                             {courses.length === 0 ? (
@@ -205,17 +215,38 @@ const Dashboard = () => {
                             ) : (
                                 <div className="course-grid">
                                     {courses.map((course) => (
-                                        <div
-                                            key={course.courseId}
-                                            className="course-card"
-                                            onClick={() => navigate(`/instructor-course/${course.courseId}`)}
-                                        >
-                                            <img
-                                                src={'https://cdn-icons-png.flaticon.com/512/3135/3135755.png'}
-                                                alt={course.title}
-                                                className="course-img"
-                                            />
-                                            <h4>{course.title}</h4>
+                                        <div key={course.courseId} className="course-card">
+                                            <div className="course-image-container">
+                                                <img
+                                                    src="https://cdn-icons-png.flaticon.com/512/3135/3135755.png"
+                                                    alt={course.title}
+                                                    className="course-img"
+                                                    onClick={() =>
+                                                        navigate(`/instructor-course/${course.courseId}`)
+                                                    }
+                                                />
+                                            </div>
+                                            <div className="course-info">
+                                                <h4 className="course-title">{course.title}</h4>
+                                                <div className="course-actions">
+                                                    <button
+                                                        className="action-btn create-btn"
+                                                        onClick={() =>
+                                                            navigate(`/courses/${course.courseId}/add-assessment`)
+                                                        }
+                                                    >
+                                                        Create Assessment
+                                                    </button>
+                                                    <button
+                                                        className="action-btn view-btn"
+                                                        onClick={() =>
+                                                            navigate(`/courses/${course.courseId}`)
+                                                        }
+                                                    >
+                                                        View Course
+                                                    </button>
+                                                </div>
+                                            </div>
                                         </div>
                                     ))}
                                 </div>
@@ -224,226 +255,8 @@ const Dashboard = () => {
                     </section>
                 )}
 
+
             </div>
-
-            <style>{`
-        /* Fonts & Reset */
-        .dashboard-container {
-          font-family: 'Inter', sans-serif;
-          max-width: 1200px;
-          margin: 2rem auto 4rem;
-          padding: 0 1rem;
-          color: #2c3e50;
-        }
-
-
-        .instructor-dashboard {
-  margin-top: 2rem;
-  color: #34495e;
-  font-family: 'Inter', sans-serif;
-}
-
-.instructor-dashboard h2 {
-  font-weight: 700;
-  font-size: 2rem;
-  margin-bottom: 1.5rem;
-  text-align: center;
-}
-
-.instructor-stats {
-  display: flex;
-  justify-content: center;
-  gap: 2rem;
-  margin-bottom: 2rem;
-  flex-wrap: wrap;
-}
-
-.stat-card {
-  background: linear-gradient(135deg, #f0f8ff, #d6eaff);
-  border-radius: 12px;
-  padding: 1.8rem 2rem;
-  min-width: 200px;
-  text-align: center;
-  box-shadow: 0 6px 16px rgb(44 62 80 / 0.08);
-  cursor: default;
-  transition: box-shadow 0.3s ease;
-}
-
-.stat-card:hover {
-  box-shadow: 0 10px 30px rgb(44 62 80 / 0.15);
-}
-
-.stat-card h3 {
-  font-weight: 600;
-  font-size: 1.1rem;
-  margin-bottom: 0.8rem;
-  color: #2c3e50;
-}
-
-.stat-card .number {
-  font-size: 2.8rem;
-  font-weight: 700;
-  color: #2980b9;
-}
-
-.instructor-courses-section h3 {
-  font-weight: 600;
-  font-size: 1.5rem;
-  margin-bottom: 1rem;
-  color: #2c3e50;
-}
-
-.empty-msg {
-  font-style: italic;
-  color: #7f8c8d;
-  text-align: center;
-  padding: 1rem 0;
-}
-
-        .loading-text {
-          font-size: 1.2rem;
-          text-align: center;
-          margin-top: 5rem;
-          color: #555;
-        }
-
-        .error-container {
-          max-width: 400px;
-          margin: 5rem auto;
-          padding: 2rem;
-          border-radius: 8px;
-          background: #fdecea;
-          color: #b00020;
-          text-align: center;
-          box-shadow: 0 2px 8px rgb(176 0 32 / 0.2);
-        }
-        .error-container h4 {
-          margin-bottom: 1rem;
-        }
-
-        /* Stats Cards */
-        .stats-cards {
-          display: flex;
-          gap: 2rem;
-          margin-bottom: 3rem;
-          flex-wrap: wrap;
-          justify-content: center;
-        }
-
-        .stats-cards .card {
-          flex: 1;
-          min-width: 220px;
-          background: linear-gradient(135deg, #ffffff, #f7f9fc);
-          border-radius: 12px;
-          box-shadow: 0 8px 24px rgb(44 62 80 / 0.1);
-          padding: 2rem;
-          text-align: center;
-          transition: box-shadow 0.3s ease;
-          cursor: default;
-        }
-        .stats-cards .card:hover {
-          box-shadow: 0 12px 36px rgb(44 62 80 / 0.2);
-        }
-
-        .card.enrolled {
-          border-left: 6px solid #2980b9; /* Blue */
-        }
-        .card.assessments {
-          border-left: 6px solid #27ae60; /* Green */
-        }
-        .card.progress {
-          border-left: 6px solid #f39c12; /* Orange */
-        }
-
-        .card h3 {
-          margin-bottom: 1rem;
-          font-weight: 600;
-          font-size: 1.2rem;
-          letter-spacing: 0.05em;
-          color: #34495e;
-        }
-        .card .number {
-          font-size: 3rem;
-          font-weight: 700;
-          color: #2c3e50;
-          margin-bottom: 1rem;
-        }
-
-        /* Progress Bar */
-        .progress-bar {
-          background: #e1e5ea;
-          border-radius: 6px;
-          height: 12px;
-          width: 100%;
-          overflow: hidden;
-        }
-        .progress-fill {
-          background: #f39c12;
-          height: 100%;
-          transition: width 0.5s ease;
-          border-radius: 6px 0 0 6px;
-        }
-
-        /* Courses Section */
-        .courses-section {
-          margin-bottom: 3rem;
-        }
-        .courses-section h2 {
-          font-weight: 600;
-          font-size: 1.8rem;
-          margin-bottom: 1.5rem;
-          color: #34495e;
-        }
-        .empty-msg {
-          font-style: italic;
-          color: #7f8c8d;
-        }
-
-        .course-grid {
-          display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-          gap: 1.5rem;
-        }
-
-        .course-card {
-          background: #fff;
-          border-radius: 12px;
-          box-shadow: 0 6px 20px rgb(0 0 0 / 0.05);
-          padding: 1rem;
-          cursor: pointer;
-          transition: transform 0.25s ease, box-shadow 0.25s ease;
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          text-align: center;
-        }
-        .course-card:hover {
-          transform: translateY(-6px);
-          box-shadow: 0 10px 30px rgb(0 0 0 / 0.1);
-        }
-
-        .course-img {
-          width: 64px;
-          height: 64px;
-          margin-bottom: 1rem;
-          object-fit: contain;
-          filter: drop-shadow(0 1px 1px rgba(0,0,0,0.05));
-        }
-
-        .course-card h4 {
-          font-weight: 600;
-          font-size: 1.1rem;
-          color: #2c3e50;
-        }
-
-        .instructor-msg {
-          font-size: 1.3rem;
-          color: #7f8c8d;
-          text-align: center;
-          margin-top: 5rem;
-          font-style: italic;
-        }
-      `}</style>
         </>
     );
 };
