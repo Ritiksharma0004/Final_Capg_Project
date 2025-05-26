@@ -159,6 +159,52 @@ namespace Final_Capg_Project.Controllers
         }
 
 
+
+        [HttpPatch("{id}")]
+        public async Task<IActionResult> PatchUser(Guid id, [FromBody] JsonPatchDocument<UserCreateDto> patchDoc)
+        {
+            if (patchDoc == null)
+                return BadRequest("Patch document is null.");
+
+            var user = await _context.Users.FindAsync(id);
+            if (user == null)
+                return NotFound();
+
+            // Map user entity to a DTO
+            var userToPatch = new UserCreateDto
+            {
+                Name = user.Name,
+                Email = user.Email,
+                Role = user.Role,
+                PasswordHash = user.PasswordHash
+            };
+
+            // Apply patch to DTO
+            patchDoc.ApplyTo(userToPatch, ModelState);
+
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            // Update entity with patched data
+            user.Name = userToPatch.Name;
+            user.Email = userToPatch.Email;
+            user.Role = userToPatch.Role;
+            user.PasswordHash = userToPatch.PasswordHash;
+
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                return StatusCode(500, "A concurrency error occurred while updating the user.");
+            }
+
+            return Ok(new { Message = "User updated successfully." });
+        }
+
+
+
         // DELETE: api/Users/{id}
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteUser(Guid id)
