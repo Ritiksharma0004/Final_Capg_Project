@@ -42,6 +42,9 @@ namespace Final_Capg_Project.Controllers
             return course;
         }
 
+
+
+
         // POST: api/Courses
         [HttpPost]
         public async Task<ActionResult<Course>> PostCourse([FromBody] CourseCreateDto courseDto)

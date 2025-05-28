@@ -1,4 +1,4 @@
-﻿
+
 
 //import React, { useState, useRef, useEffect } from 'react';
 //import { Link, useNavigate } from 'react-router-dom';
@@ -247,12 +247,7 @@ const Navbar = () => {
                             </div>
 
                             {/* Profile Settings Link */}
-                            <Link
-                                to="/profile-settings"
-                                className="btn btn-outline-secondary btn-sm d-flex align-items-center gap-1"
-                            >
-                                <FiSettings /> 
-                            </Link>
+                          
 
                             {/* Logout */}
                             <button

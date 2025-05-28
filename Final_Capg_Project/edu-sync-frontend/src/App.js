@@ -13,7 +13,7 @@ import MyCourse from './pages/MyCourse';
 import AddAssessment from './pages/AddAssessment';
 import TakeAssessment from './pages/TakeAssessment';
 import ProfileSettings from './pages/ProfileSettings';
-
+import AssessmentResult from './pages/AssessmentResult'
 
 
 function App() {
@@ -34,6 +34,7 @@ function App() {
                     <Route path="/my-course/:courseId/take-assessment/:assessmentId" element={<TakeAssessment />} />
                     <Route path="/courses/:courseId/add-assessment" element={<AddAssessment />} />
                     <Route path="/profile-settings" element={<ProfileSettings />} />
+                    <Route path="/assessment-result" element={<AssessmentResult />} />
                 </Routes>
             </div>
         </Router>

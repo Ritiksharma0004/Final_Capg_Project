@@ -727,3 +727,93 @@
         margin-bottom: 1.5rem;
         color: #34495e;
     }
+
+
+.table-container {
+    max-width: 900px;
+    margin: 2rem auto;
+    padding: 20px;
+    background: #f9faff;
+    border-radius: 18px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.clean-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 12px;
+    font-weight: 600;
+    color: #333;
+    text-align: left;
+}
+
+    .clean-table thead th {
+        padding: 14px 20px;
+        background: linear-gradient(135deg, #6a82fb, #fc5c7d);
+        color: white;
+        border-radius: 12px;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        box-shadow: 0 3px 6px rgba(252, 92, 125, 0.4), 0 3px 6px rgba(106, 130, 251, 0.4);
+        user-select: none;
+    }
+
+    .clean-table tbody tr {
+        background: white;
+        border-radius: 14px;
+        box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+        cursor: default;
+    }
+
+        .clean-table tbody tr:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px rgba(252, 92, 125, 0.15), 0 4px 12px rgba(106, 130, 251, 0.2);
+        }
+
+    .clean-table tbody td {
+        padding: 16px 20px;
+        border-radius: 12px;
+        vertical-align: middle;
+        font-weight: 500;
+        color: #444;
+    }
+
+.pass-row {
+    background: linear-gradient(90deg, #00c853, #b9f6ca);
+    color: #1b5e20;
+    font-weight: 700;
+    box-shadow: 0 2px 12px #00c853aa;
+    transition: none;
+}
+
+.fail-row {
+    background: linear-gradient(90deg, #d50000, #ff8a80);
+    color: #b71c1c;
+    font-weight: 700;
+    box-shadow: 0 2px 12px #d50000aa;
+    transition: none;
+}
+
+.badge {
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    display: inline-block;
+    min-width: 70px;
+    text-align: center;
+    color: white;
+    user-select: none;
+}
+
+    .badge.pass {
+        background-color: #00c853;
+        box-shadow: 0 0 8px #00c853cc;
+    }
+
+    .badge.fail {
+        background-color: #d50000;
+        box-shadow: 0 0 8px #d50000cc;
+    }
